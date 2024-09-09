@@ -1,18 +1,16 @@
 pipeline {
-    agent{
+    agent {
         docker { image 'node:16-alpine' }
-        
     }
     stages {
-        stage ('test') {
+        stage('Test') {
             steps {
                 sh 'node --version'
             }
         }
-    }
-        stage('Terraform init') {
-                steps {
-                    sh 'terraform init ' // Use -reconfigure if preferred
+        stage('Terraform Init') {
+            steps {
+                sh 'terraform init' // Use -reconfigure if preferred
             }
         }
         stage('Plan') {
@@ -21,7 +19,7 @@ pipeline {
                 sh 'terraform show -no-color tfplan > tfplan.txt' // Optional: for human-readable output
                 sh 'terraform graph | dot -Tpng > plan.png'
                 archiveArtifacts artifacts: 'tfplan.txt, plan.png', allowEmptyArchive: true
-
             }
         }
     }
+}
