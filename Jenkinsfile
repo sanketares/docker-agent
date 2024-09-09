@@ -1,11 +1,12 @@
 pipeline {
     agent {
-        docker { image 'node:16-alpine' }
+        docker { image 'terraform' }
     }
     stages {
         stage('Test') {
             steps {
                 sh 'node --version'
+                
             }
         }
         stage('Terraform Init') {
