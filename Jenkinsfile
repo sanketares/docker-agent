@@ -1,14 +1,18 @@
 pipeline {
     agent any
-    
+    environment {
+        GITHUB_TOKEN = credentials('git-token')
+
+    }
 
     stages {
         stage('Checkout') {
             steps {
-                // Checkout code from GitHub
-                git 'https://github.com/sanketares/docker-agent.git'
+                git branch: 'main', url: 'https://github.com/sanketares/docker-agent.git'
             }
         }
+
+    
 
         stage('Build Docker Image') {
             steps {
