@@ -1,8 +1,8 @@
 pipeline {
-    agent any
-    environment {
-        GITHUB_TOKEN = credentials('git-token')
-
+    agent {
+        docker {
+            image 'hashicorp/terraform'
+        }
     }
 
     stages {
