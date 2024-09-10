@@ -2,6 +2,7 @@ pipeline {
     agent {
         docker {
             image 'hashicorp/terraform'
+            args '--entrypoint /bin/sh' // Add entrypoint argument here
         }
     }
 
@@ -12,24 +13,20 @@ pipeline {
             }
         }
 
-    
-
-
         stage('Terraform Init') {
             steps {
                 script {
                     // Run terraform init inside the Docker container
-                        sh 'terraform init'
-                    }
+                    sh 'terraform init'
                 }
-            
+            }
         }
 
         stage('Terraform Plan') {
             steps {
                 script {
-                    // Run terraform plan inside the Docker container
-                    docker.image('my-terraform-image').inside {
+                    // Run terraform plan inside the Docker container with the specified entrypoint
+                    docker.image('hashicorp/terraform').inside('--entrypoint /bin/sh') {
                         sh 'terraform plan'
                     }
                 }
