@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image 'hashicorp/terraform'
-            args '--entrypoint /bin/sh' // Add entrypoint argument here
+            args '--entrypoint /bin/sh'
         }
     }
 
@@ -36,8 +36,10 @@ pipeline {
 
     post {
         always {
-            // Clean up actions, like archiving the build results
-            cleanWs()
+            // Ensure the cleanWs step runs in a proper node context
+            node {
+                cleanWs()
+            }
         }
     }
 }
