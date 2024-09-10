@@ -12,7 +12,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout Terraform code from version control
-                git 'https://github.com/your-repo/terraform-code.git'
+              git branch: 'main', url: 'https://github.com/your-repo/terraform-code.git'
             }
         }
         stage('Terraform Init') {
