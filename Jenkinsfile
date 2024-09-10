@@ -22,7 +22,7 @@ pipeline {
                         sh 'terraform init'
                     }
                 }
-            }
+            
         }
 
         stage('Terraform Plan') {
