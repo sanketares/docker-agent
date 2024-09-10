@@ -19,7 +19,6 @@ pipeline {
             steps {
                 script {
                     // Run terraform init inside the Docker container
-                    docker.image('my-terraform-image').inside {
                         sh 'terraform init'
                     }
                 }
