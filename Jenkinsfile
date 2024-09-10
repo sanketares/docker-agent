@@ -2,6 +2,12 @@ pipeline {
     agent {
         docker { image 'hashicorp/terraform:latest' }
     }
+     environment {
+        AWS_ACCESS_KEY_ID     = credentials('aws-access-key-id')
+        AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
+        GITHUB_TOKEN = credentials('git-token')
+        AWS_DEFAULT_REGION    = 'us-west-2'
+    }
     stages {
         stage('Checkout') {
             steps {
